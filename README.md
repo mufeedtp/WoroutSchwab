@@ -1,8 +1,11 @@
-// Loop through each character and use JavaScript to simulate keypress
+ Actions actions = new Actions(driver);
+
+            // Click on the input field to focus on it
+            actions.Click(inputElement).Build().Perform();
+
+            // Loop through each character and send it using SendKeys
             foreach (char c in textToEnter)
             {
-                ((IJavaScriptExecutor)driver).ExecuteScript(
-                    $"arguments[0].dispatchEvent(new KeyboardEvent('keypress', {{ key: '{c}', charCode: '{(int)c}', keyCode: '{(int)c}' }}));", 
-                    inputElement);
+                actions.SendKeys(c.ToString()).Build().Perform();
                 Thread.Sleep(100); // Add a small delay between characters (optional)
             }
